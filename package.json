@@ -4,8 +4,7 @@
   "description": "A javascript library to build rich user experience web pages and components.",
   "main": "index.js",
   "types": "./index.d.ts",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/compositejs/deepx.git"
@@ -25,10 +24,10 @@
   },
   "dependencies": {
     "datasense": "1.0.1",
-    "hje": "1.0.1"
+    "hje": "2.0.0-alpha.1"
   },
   "homepage": "https://github.com/compositejs/deepx/wiki",
   "devDependencies": {
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.6"
   }
 }
