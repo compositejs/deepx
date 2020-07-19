@@ -1,6 +1,2 @@
-export interface DisposableContract {
-    /**
-     * Disposes the instance.
-     */
-    dispose(): void;
-}
+import { BaseComponent } from "./component";
+export { BaseComponent };

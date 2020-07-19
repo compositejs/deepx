@@ -1,5 +1,5 @@
-import Hje from "hje";
-import DataSense from "datasense";
+import * as Hje from "hje";
+import * as DataSense from "datasense";
 import { BaseComponent } from "./component";
 
 function init() {

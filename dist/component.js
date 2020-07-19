@@ -1,96 +1,107 @@
-import * as Hje from "hje";
-import * as DataSense from "datasense";
-
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BaseComponent = void 0;
+var Hje = require("hje");
+var DataSense = require("datasense");
 /**
  * Disposable instance.
  */
-export class BaseComponent extends Hje.BaseComponent {
-    private _inner2 = {
-        evKeys: [] as string[],
-        obj: new DataSense.PropsController(),
-        ev: new DataSense.EventController()
-    };
-
+var BaseComponent = /** @class */ (function (_super) {
+    __extends(BaseComponent, _super);
     /**
      * Initializes a new instance of the BaseComponent class.
      * @param element The element.
      * @param options The options.
      */
-    constructor(element: any, options?: Hje.ComponentOptionsContract) {
-        super(element, options);
-        this.disposableStore.push(this._inner2.obj, this._inner2.ev, {
-            dispose() {
-                while (this._inner2.evKeys.length) this._inner2.evKeys.pop();
+    function BaseComponent(element, options) {
+        var _this = _super.call(this, element, options) || this;
+        _this._inner2 = {
+            evKeys: [],
+            obj: new DataSense.PropsController(),
+            ev: new DataSense.EventController()
+        };
+        _this.disposableStore.push(_this._inner2.obj, _this._inner2.ev, {
+            dispose: function () {
+                while (this._inner2.evKeys.length)
+                    this._inner2.evKeys.pop();
             }
         });
-        this._inner2.obj.onPropsChanged(ev => {
-            let obj = {} as any;
-            ev.changes.forEach(ele => {
+        _this._inner2.obj.onPropsChanged(function (ev) {
+            var obj = {};
+            ev.changes.forEach(function (ele) {
                 obj[ele.key] = ele.value;
             });
-            super.prop(obj);
+            _super.prototype.prop.call(_this, obj);
         });
+        return _this;
     }
-
     /**
      * Gets or sets a property.
      * @param key The property key.
      * @param value The optional value of the property if need set.
      */
-    prop<T = any>(key: string | any, value?: T | any) {
-        if (!key) return undefined;
+    BaseComponent.prototype.prop = function (key, value) {
+        if (!key)
+            return undefined;
         if (typeof key === "object") {
             this._inner2.obj.setProps(key);
             return Object.keys(key);
         }
-
-        if (arguments.length > 1) this._inner2.obj.setProp(key, value);
+        if (arguments.length > 1)
+            this._inner2.obj.setProp(key, value);
         return this._inner2.obj.getProp(key);
-    }
-
+    };
     /**
      * Gets all property keys.
      */
-    public getKeys() {
+    BaseComponent.prototype.getKeys = function () {
         return this._inner2.obj.getKeys();
-    }
-
+    };
     /**
      * Checks if the specific key is existed.
      * @param key  The property key.
      */
-    public hasProp(key: string) {
+    BaseComponent.prototype.hasProp = function (key) {
         return this._inner2.obj.hasProp(key);
-    }
-
+    };
     /**
      * Gets a value of the specific key.
      * @param key  The property key.
      */
-    public getProp(key: string) {
+    BaseComponent.prototype.getProp = function (key) {
         return this._inner2.obj.getProp(key);
-    }
-
+    };
     /**
      * Sets a value of the specific key.
      * @param key  The property key.
      * @param value  The value of the property to set.
      * @param message  A message for the setting event.
      */
-    public setProp(key: string, value: any, message?: DataSense.FireInfoContract | string) {
+    BaseComponent.prototype.setProp = function (key, value, message) {
         return this._inner2.obj.setProp(key, value, message);
-    }
-
+    };
     /**
      * Sets a value of the specific key. A status and further information will be returned.
      * @param key  The property key.
      * @param value  The value of the property to set.
      * @param message  A message for the setting event.
      */
-    public setPropForDetails<T>(key: string, value: T, message?: DataSense.FireInfoContract | string): DataSense.ChangedInfo<T> {
+    BaseComponent.prototype.setPropForDetails = function (key, value, message) {
         return this._inner2.obj.setPropForDetails(key, value, message);
-    }
-
+    };
     /**
      * Sets a value of the specific key by a Promise.
      * @param key  The property key.
@@ -98,10 +109,9 @@ export class BaseComponent extends Hje.BaseComponent {
      * @param compatible  true if the value can also be a non-Promise; otherwise, false.
      * @param message  A message for the setting event.
      */
-    public setPromiseProp<T>(key: string, value: Promise<T>, compatible?: boolean, message?: DataSense.FireInfoContract | string): Promise<T> {
+    BaseComponent.prototype.setPromiseProp = function (key, value, compatible, message) {
         return this._inner2.obj.setPromiseProp(key, value, compatible, message);
-    }
-
+    };
     /**
      * Sets a value of the specific key by an observable which can be subscribed.
      * @param key  The property key.
@@ -109,28 +119,25 @@ export class BaseComponent extends Hje.BaseComponent {
      * @param message  A message for the setting event.
      * @param callbackfn  A function will be called on subscribed.
      */
-    public setSubscribeProp<T>(key: string, value: DataSense.SubscriberContract<T>, message?: DataSense.FireInfoContract | string, callbackfn?: (ev: DataSense.ChangedInfo<T>, message: DataSense.FireInfoContract) => void, thisArg?: any) {
+    BaseComponent.prototype.setSubscribeProp = function (key, value, message, callbackfn, thisArg) {
         return this._inner2.obj.setSubscribeProp(key, value, message, callbackfn, thisArg);
-    }
-
+    };
     /**
      * Removes a property.
      * @param key  The property key.
      * @param message  A message for the setting event.
      */
-    public removeProp(key: string | string[], message?: DataSense.FireInfoContract | string) {
+    BaseComponent.prototype.removeProp = function (key, message) {
         return this._inner2.obj.removeProp(key, message);
-    }
-
+    };
     /**
      * Batch sets properties.
      * @param obj  The data with properties to override current ones.
      * @param message  A message for the setting event.
      */
-    public setProps(obj: any | DataSense.PropUpdateActionContract<any>[], message?: DataSense.FireInfoContract | string) {
+    BaseComponent.prototype.setProps = function (obj, message) {
         return this._inner2.obj.setProps(obj, message);
-    }
-
+    };
     /**
      * Registers an event listener on the speicific property has been changed.
      * @param key  The property key.
@@ -139,65 +146,59 @@ export class BaseComponent extends Hje.BaseComponent {
      * @param options  The event listener options.
      * @param disposableArray  An additional disposable array instance for push current event handler.
      */
-    public onPropChanged<T>(
-        key: string,
-        h: DataSense.EventHandlerContract<DataSense.ChangedInfo<T>> | DataSense.EventHandlerContract<DataSense.ChangedInfo<T>>[],
-        thisArg?: any,
-        options?: DataSense.EventOptionsContract,
-        disposableArray?: DataSense.DisposableArrayContract
-    ) {
+    BaseComponent.prototype.onPropChanged = function (key, h, thisArg, options, disposableArray) {
         return this._inner2.obj.onPropChanged(key, h, thisArg, options, disposableArray);
-    }
-
+    };
     /**
      * Creates a client for props.
      */
-    public createPropsClient() {
+    BaseComponent.prototype.createPropsClient = function () {
         return this._inner2.obj.createClient();
-    }
-
+    };
     /**
      * Creates a client for a property.
      * @param key  The property key.
      */
-    public createPropClient(key: string) {
+    BaseComponent.prototype.createPropClient = function (key) {
         return this._inner2.obj.createPropClient(key);
-    }
-
+    };
     /**
      * Adds an event listener.
      * @param key The event key.
      * @param handler The handler of the event to add.
      */
-    public on(key: string, handler: any, thisArg?: any, options?: DataSense.EventOptionsContract, disposableArray?: DataSense.DisposableArrayContract) {
-        if (this._inner2.evKeys.indexOf(key) < 0) super.on(key, (ev: any) => {
-            this._inner2.ev.fire(key, ev);
-        });
+    BaseComponent.prototype.on = function (key, handler, thisArg, options, disposableArray) {
+        var _this = this;
+        if (this._inner2.evKeys.indexOf(key) < 0)
+            _super.prototype.on.call(this, key, function (ev) {
+                _this._inner2.ev.fire(key, ev);
+            });
         return this._inner2.ev.on(key, handler, thisArg, options, disposableArray);
-    }
-
+    };
     /**
      * Creates an observable instance so that any event listeners and subscribers will be disposed automatically when that instance is disposed.
      */
-    public createEventListeners() {
+    BaseComponent.prototype.createEventListeners = function () {
         return this._inner2.ev.createObservable();
-    }
-
+    };
     /**
      * Creates a single event observable.
      * @param key  The event key.
      */
-    public createEventListener(key: string) {
+    BaseComponent.prototype.createEventListener = function (key) {
         this._inner2.ev.createSingleObservable(key);
-    }
-    
+    };
     /**
      * Disposeses this instance and remove the element from the tree.
      */
-    dispose() {
+    BaseComponent.prototype.dispose = function () {
         this._inner2.obj.dispose();
         this._inner2.ev.dispose();
-        super.dispose();
-        while (this._inner2.evKeys.length) this._inner2.evKeys.pop();
-    }
-}
+        _super.prototype.dispose.call(this);
+        while (this._inner2.evKeys.length)
+            this._inner2.evKeys.pop();
+    };
+    return BaseComponent;
+}(Hje.BaseComponent));
+exports.BaseComponent = BaseComponent;
+//# sourceMappingURL=component.js.map

@@ -4,7 +4,10 @@
   "description": "A javascript library to build rich user experience web pages and components.",
   "main": "index.js",
   "types": "./index.d.ts",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc --project ./src/tsconfig.json",
+    "test": "node ./test/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/compositejs/deepx.git"

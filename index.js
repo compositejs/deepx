@@ -1,1 +1,2 @@
-module.exports = require("./src/index.js");
+// DeepX
+module.exports = require("./disc/index.js");

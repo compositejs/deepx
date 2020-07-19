@@ -1,2 +1,2 @@
-import * as DeepX from './src'
+import * as DeepX from './dist'
 export = DeepX;
