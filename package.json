@@ -14,11 +14,7 @@
   },
   "keywords": [
     "html",
-    "mvvm",
-    "template",
-    "view",
-    "mvc",
-    "render"
+    "mvvm"
   ],
   "author": "Kingcean Tuan <kingcean@live.com> (http://kingcean.org)",
   "license": "MIT",
@@ -26,8 +22,8 @@
     "url": "https://github.com/compositejs/deepx/issues"
   },
   "dependencies": {
-    "datasense": "1.0.1",
-    "hje": "2.0.0-alpha.1"
+    "datasense": "1.1.1",
+    "hje": "2.0.0-alpha.3"
   },
   "homepage": "https://github.com/compositejs/deepx/wiki",
   "devDependencies": {
