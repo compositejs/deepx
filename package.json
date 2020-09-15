@@ -22,11 +22,11 @@
     "url": "https://github.com/compositejs/deepx/issues"
   },
   "dependencies": {
-    "datasense": "1.1.1",
+    "datasense": "1.2.0",
     "hje": "2.0.0-alpha.3"
   },
   "homepage": "https://github.com/compositejs/deepx/wiki",
   "devDependencies": {
-    "typescript": "^3.9.6"
+    "typescript": "^4.0.2"
   }
 }
